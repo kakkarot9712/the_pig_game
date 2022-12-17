@@ -1,0 +1,18 @@
+.overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    padding: 1.5rem;
+    left: 35%;
+    z-index: 5;
+    width: 12rem;
+    height: 94%;
+}
+
+.game-controls {
+    display: flex;
+    flex-direction: column;
+}
