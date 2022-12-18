@@ -16,3 +16,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(135deg, #48BAFF , #9013FE) no-repeat;
 }
+
+.push {
+  animation-name: push;
+  animation-duration: 200ms;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes push {
+  
+  0% {
+      transform: translateY(0);
+  }
+
+  50% {
+      transform: translateY(2px);
+  }
+
+  100% {
+      transform: translateY(0);
+  }
+}

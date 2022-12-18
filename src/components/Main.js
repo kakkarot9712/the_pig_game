@@ -1,73 +1,107 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import classes from "./Main.module.css";
 import Overlay from "./Overlays/Overlay";
 import PlayerCards from "./PlayersCard";
 
-const Main = () => {
-  // 0 is Player 1, 1 is Player 2
-  const [playerTurn, switchPlayerTurn] = useState(0);
+const initialState = {
+  turnOf: 1,
+  p1_score: 0,
+  p2_score: 0,
+  current: 0,
+  foundWinner: false,
+};
 
-  const initialState = {
-    turnOf: 1,
-    p1_score: 0,
-    p2_score: 0,
-    current: 0,
-  };
+const reducerFn = (state, action) => {
+  if (action.type === "SWITCH") {
+    return {
+      ...state,
+      turnOf: state.turnOf === 1 ? 2 : 1,
+    };
+  }
 
-  const dispatchFn = (state, action) => {
-    if (action.type === "SWITCH") {
+  if (action.type === "CHECK-WINNER") {
+    if (state.p1_score > 100 || state.p2_score > 100) {
+      if (state.p1_score > 100) {
+        return {
+          ...state,
+          foundWinner: 1,
+        };
+      }
       return {
         ...state,
-        turnOf: state.turnOf === 1 ? 2 : 1,
+        foundWinner: 2,
       };
     }
+    return {
+      ...state,
+    };
+  }
 
-    if (action.type === "HOLD") {
-    }
+  if (action.type === "CURRENT") {
+    return {
+      ...state,
+      current: state.current + action.value,
+    };
+  }
 
-    if (action.type === "RESET") {
+  if (action.type === "ONE") {
+    return {
+      ...state,
+      turnOf: state.turnOf === 1 ? 2 : 1,
+      current: 0,
+    };
+  }
+
+  if (action.type === "RESET") {
+    return {
+      ...initialState,
+    };
+  }
+
+  if (action.type === "HOLD") {
+    const player = state.turnOf;
+    if (player === 1) {
+      const newScore = state.p1_score + state.current;
       return {
-        ...initialState,
+        ...state,
+        p1_score: newScore,
+        current: 0,
+        turnOf: 2,
       };
     }
-
-    if (action.type === "HOLD") {
-      const player = state.turnOf;
-      if (player === 1) {
-        const newScore = state.p1_score + state.current;
-        return {
-          ...state,
-          p1_score: newScore,
-          current: 0,
-        };
-      }
-      if (player === 2) {
-        const newScore = state.p2_score + state.current;
-        return {
-          ...state,
-          p2_score: newScore,
-          current: 0,
-        };
-      }
+    if (player === 2) {
+      const newScore = state.p2_score + state.current;
+      return {
+        ...state,
+        p2_score: newScore,
+        current: 0,
+        turnOf: 1,
+      };
     }
-    return state;
-  };
+  }
+  return state;
+};
 
+const Main = () => {
+  // 1 is Player 1, 2 is Player 2
+  const [state, dispatchFn] = useReducer(reducerFn, initialState);
   return (
     <main className={classes.main}>
       <PlayerCards
         pid="1"
-        score="20"
-        currentVal="5"
-        active={playerTurn === 1}
+        score={state.p1_score}
+        currentVal={state.turnOf === 1 ? state.current : 0}
+        active={state.turnOf === 1}
+        winner={state.foundWinner === 1}
       />
       <PlayerCards
         pid="2"
-        score="30"
-        currentVal="1"
-        active={playerTurn === 2}
+        score={state.p2_score}
+        currentVal={state.turnOf !== 1 ? state.current : 0}
+        active={state.turnOf === 2}
+        winner={state.foundWinner === 2}
       />
-      <Overlay turnOf={playerTurn} switchTurn={switchPlayerTurn} />
+      <Overlay state={state} dispatch={dispatchFn} />
     </main>
   );
 };

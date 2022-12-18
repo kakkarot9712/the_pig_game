@@ -16,6 +16,36 @@ h1 {
     font-size: 2.7rem;
 }
 
+.winner-1 {
+    position: absolute;
+    top: 2rem;
+    width: 13rem;
+    left: -3.2rem;
+    transform: rotate(-45deg);
+    transform-origin: center;
+    text-align: center;
+    background-color: #9013FE;
+    color: white;
+    font-size: xx-large;
+}
+
+.hidden {
+    display: none;
+}
+
+.winner-2 {
+    position: absolute;
+    top: 2rem;
+    width: 13rem;
+    right: -3.2rem;
+    transform: rotate(45deg);
+    transform-origin: center;
+    text-align: center;
+    background-color: #9013FE;
+    color: white;
+    font-size: xx-large;
+}
+
 .player__name {
     font-weight: 400;
     color: black;

@@ -6,7 +6,7 @@
     position: absolute;
     top: 0;
     padding: 1.5rem;
-    left: 35%;
+    left: calc(50% - 6rem);
     z-index: 5;
     width: 12rem;
     height: 94%;
