@@ -21,8 +21,8 @@ const reducerFn = (state, action) => {
   }
 
   if (action.type === "CHECK-WINNER") {
-    if (state.p1_score > 10 || state.p2_score > 10) {
-      if (state.p1_score > 10) {
+    if (state.p1_score > 100 || state.p2_score > 100) {
+      if (state.p1_score > 100) {
         return {
           ...state,
           foundWinner: 1,
