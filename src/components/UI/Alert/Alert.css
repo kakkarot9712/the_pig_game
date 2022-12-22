@@ -1,0 +1,38 @@
+.alert {
+    padding: 10px;
+    position: absolute;
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    transform: translateY(-110%);
+    color: #9013FE;
+    border: 2px solid #9013FE;
+    font-weight: 500;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.open {
+    animation: anim 3000ms ease-out;
+}
+
+@keyframes anim {
+    0% {
+        transform: translateY(-110%);
+    }
+
+    20% {
+        transform: translateY(0);
+    }
+
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-110%);
+    }
+}
