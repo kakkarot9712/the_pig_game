@@ -27,7 +27,7 @@ const Overlay = (props) => {
 
   const rollTheDice = (event) => {
     animate(event);
-    const random = (Math.floor(Math.random() * 100000) % 6) + 1;
+    const random = Math.floor(Math.random() * 6) + 1;
     setnum(random);
     if (random === 1) {
       props.dispatch({ type: "ONE" });
