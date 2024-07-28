@@ -1,30 +1,76 @@
-# React + TypeScript + Vite
+# The Pig Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Pig Game made using HTML, CSS, JavaScript and ReactJs. This project was generated with [Vite](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) which uses [Babel](https://babeljs.io/) for Fast Refresh.
+<br>
+Note: This website uses [React.JS v18.3.1](https://github.com/facebook/react/releases/tag/v18.3.1)
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is Pig game, playable with 2 players. Learn more about concept of Pig Game in general from [Here](<https://en.wikipedia.org/wiki/Pig_(dice_game)>)
 
-## Expanding the ESLint configuration
+## Rules of Game
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+As Pig Game itself has lots of different varients with different sets of rules, This Game also follows some set of rules.
 
-- Configure the top-level `parserOptions` property like this:
+1. Only 2 User can play this game.
+2. This game will be played with one dice only.
+3. One Player will keep getting turn until dice rolls to a 1.
+4. Any Dice rolls except 1 will get added to the current points of player, who is currently rolling the dice.
+5. In every turn player can either choose to play another turn or player can hold points collected by previous turn.
+6. If player chooses to hold points, all the points collected by previous turns will be added to player's actual score but player will loose the turn.
+7. If player chooses to keep playing, then that points will not be added to actual score.
+8. If dice rolls to a 1, turn will be switched to second player and all the collected score of previous player will be lost.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+By Abiding above rules, Any player who gets score of 100 first will be declared as winner.
+
+## Demo
+
+Here is the [Demo of website](https://the-pig-game-theta.vercel.app/)
+<br>
+Deployed using [Vercel](https://vercel.com/)
+
+## Built With
+
+- <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+- <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+- <img src="https://img.shields.io/badge/HTML5%20-%23e34f26.svg?&style=for-the-badge&logo=html5&logoColor=white" />
+- <img src="https://img.shields.io/badge/CSS3-1572B6?&style=for-the-badge&logo=css3&logoColor=white" />
+
+## Screenshots
+
+<details>
+  <summary>Click to see screenshots</summary>
+  <br>
+  <img src='/public/screenshots/home.png'></img>
+  <img src='/public/screenshots/playing.png'></img>
+  <img src='/public/screenshots/won.png'></img>
+</details>
+
+## Getting Started
+
+### Prerequisites
+
+1. [Node.js v20.16.0 and UP](https://nodejs.org/en/) (LTS Version Recommanded)
+
+### Build
+
+If anyone wants to test this project, user can do so by following below instruction.
+
+- Download source code and extract anywhere into the PC.
+- Open Terminal where project is extracted and then run following command
+
+```
+pnpm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- After npm installs all dependency, user can run below command to see project in action.
+
+```
+pnpm dev
+```
+
+- If Above command is working correctly then user can build this project by using below command.
+
+```
+pnpm build
+```
