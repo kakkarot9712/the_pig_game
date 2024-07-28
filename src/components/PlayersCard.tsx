@@ -1,10 +1,17 @@
-import React from "react";
 import "./PlayersCard.css";
+import { Turn } from "../store/slice";
 
-const PlayerCards = (props) => {
-  const winnerClasses = `${props.pid === "1" ? "winner-1" : "winner-2"} ${
-    props.winner ? "" : "hidden"
-  }`;
+const PlayerCards = (props: {
+  pid: Turn;
+  score: number;
+  currentVal: number;
+  winner: boolean;
+  active: boolean;
+}) => {
+  debugger;
+  const winnerClasses = `${
+    props.pid === Turn.Player1 ? "winner-1" : "winner-2"
+  } ${props.winner ? "" : "hidden"}`;
   const classes = `player__card ${props.active ? "active" : ""}`;
   return (
     <div className={classes}>

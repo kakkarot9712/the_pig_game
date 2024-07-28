@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./Alert.css";
+import { Turn } from "../../../store/slice";
 
-const Alert = (props) => {
+const Alert = (props: { alert: Turn | null }) => {
   const alertRef = useRef(null);
   return (
     <CSSTransition
@@ -19,7 +20,7 @@ const Alert = (props) => {
     >
       <div className="alert" ref={alertRef}>
         <p>{`Game is ended, Winner is ${
-          props.alert === 1 ? "Player 1" : "Player 2"
+          props.alert === Turn.Player1 ? "Player 1" : "Player 2"
         }!`}</p>
       </div>
     </CSSTransition>

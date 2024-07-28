@@ -1,6 +1,10 @@
 import classes from "./Button.module.css";
 
-const Button = (props) => {
+const Button = (props: {
+  disabled?: boolean;
+  onClickHandler?: React.MouseEventHandler<HTMLButtonElement>;
+  name: string;
+}) => {
   return (
     <button
       type="button"
