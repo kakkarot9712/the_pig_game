@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export enum Mode {
-  Local,
-  Online,
+  Local = 1,
+  Online = 2,
 }
 
 export enum Turn {

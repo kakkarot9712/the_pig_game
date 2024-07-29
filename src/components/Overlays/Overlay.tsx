@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import Button from "../UI/Button";
+import Button from "../Local/Button";
 import Dice from "./Dice";
 import "./Overlay.css";
 import {
@@ -67,7 +67,7 @@ const Overlay = (props: OverlayProps) => {
         <Button name="🔃 Restart Game" onClickHandler={resetAll} />
         {!started || Boolean(winner) ? (
           <Button
-            name="🏠 Home"
+            name="🔙 Go Back"
             onClickHandler={dispatch.bind(this, modeSelected(null))}
           />
         ) : null}
