@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/play/online",
     element: <OnlineMode />
-  }
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
