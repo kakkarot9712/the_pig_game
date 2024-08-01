@@ -2,4 +2,30 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.mode_box h1 {
+  margin: 10px;
+}
+
+/* .code-input {
+
+} */
+
+.code-input {
+  width: 150px;
+  border: none;
+  border-bottom: 3px solid #8248bd;
+  margin: 1rem 10px;
+  text-align: center;
+  font-size: 36px;
+  background: transparent;
+  /* cursor: not-allowed; */
+  /* pointer-events: none; */
+}
+
+.code-input:focus {
+  border-bottom: 3px solid #663399;
+  outline: none;
 }
