@@ -10,7 +10,8 @@ export interface ClientMessage {
 export interface ServerMessage {
     Type: ServerMessageType,
     Data: string,
-    Room: string
+    Room: string,
+    From: string
 }
 
 export enum ConnectionModes {

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { ClientMessageType, ConnectionModes } from "../../types/ws";
-import { configureWsClient, parseServerResponse } from "../../utils/helpers";
+import { ConnectionModes } from "../../types/ws";
+import { parseServerResponse } from "../../utils/helpers";
 
 export default function useWebsocket(url: string) {
-    const [isConnected, setIsConnected] = useState(false);
-    const [isLoaing, setIsLoading] = useState(false);
     const [selectedMode, setSelectedMode] = useState<ConnectionModes | null>(null);
     const [ws, setWs] = useState<WebSocket>();
     const [room, setRoom] = useState<string | null>();
-    const [isReady, setIsReady] = useState(false);
+    const [player2Id, setPlayer2Id] = useState<string|null>(null);
+    const [connectionId, setConnectionId] = useState<string | null>(null);
+    // const [player2Id]
 
     useEffect(() => {
         const ws = new WebSocket(url);
@@ -21,16 +21,17 @@ export default function useWebsocket(url: string) {
             const res = parseServerResponse(m.data);
             if (res.Type === "ROOM_CREATED") {
                 const room = res.Room;
-                setIsLoading(false);
                 setRoom(room);
             } else if (res.Type === "ROOM_JOINED") {
+                if(res.From !== connectionId) setPlayer2Id(res.From);
+                // alert("Both connected!")
                 // TODO: Change UI for Start Playing
             } else if (res.Type === "ROOM_LEFT") {
                 // TODO: Cleanup and Exit Game
             } else if (res.Type === "PONG") {
                 // Connection working
-                setIsConnected(true);
                 setWs(ws);
+                setConnectionId(res.From);
             } else {
                 // TODO: Normal Message
             }
@@ -45,16 +46,15 @@ export default function useWebsocket(url: string) {
     }, [])
 
     useEffect(() => {
-        if (selectedMode && isConnected && ws) {
-            setIsLoading(true);
-            if (selectedMode === ConnectionModes.CreateRoom && !room) {
-                ws.send(JSON.stringify({ Type: "CREATE_ROOM" }));
+        if (selectedMode && ws) {
+            if (selectedMode === ConnectionModes.CreateRoom) {
+                !room && ws.send(JSON.stringify({ Type: "CREATE_ROOM" }));
             } else {
-                // if(room) ws.send(JSON.stringify({Type: "JOIN_ROOM", Room: room}));
+                room && ws.send(JSON.stringify({ Type: "JOIN_ROOM", Data: room }));
                 // TODO: Join Room
             }
         }
-    }, [selectedMode, isConnected, ws, room])
+    }, [selectedMode, ws, room])
 
-    return { isConnected, setSelectedMode, setRoom, selectedMode, room, isLoaing, isReady }
+    return { setSelectedMode, setRoom, selectedMode, room, connectionId, player2Id }
 }
